@@ -5,7 +5,7 @@ __created__     =       "05-08-2019-08:51"
 '''
 
 
-from league.settings import DEBUG
+from cassiopeia import Summoner
 from datetime import timedelta
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -25,6 +25,7 @@ from rest_framework.status import (
 from rest_framework.views import APIView
 
 
+import cassiopeia as cass
 import json
 import time
 
@@ -66,9 +67,19 @@ class LeagueOfLegends(APIView):
 
 		# Get request data.
 		form = request.data
-		a = form['abc']
+		nickname = form['nickname']
+		region = form['region']
+
+		cass.set_riot_api_key("API-KEY")
+
+		try:
+			player = cass.get_summoner(name=nickname, region=region)
+			# player = Summoner(name=nickname, region=region)
+
+		except Exception as e:
+			return Response({'error': str(e)}, status=HTTP_400_BAD_REQUEST)
+			
 		result = {
-			'asd': a,
-			'dsa': 2,
+			'player': str(player),
 		}
 		return Response(result, status=HTTP_200_OK)
