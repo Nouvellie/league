@@ -4,9 +4,11 @@
 {% block title %}| PROFILE{% endblock %}
 
 {% block content %}
-<br>
-	<center>
-		<input type="text" name="summonerId" ng-model="summonerId">
-		<button type="button" class="btn btn-info">SEARCH</button>
-	</center>
+<div ng-controller="leagueStatsController">
+  <center>
+    <br>
+    Nickname: <input type="text" name="summonerName" ng-model="summonerName">
+    <button ng-click="searchSummoner($event)" type="button" class="btn btn-info">Search</button>
+  </center>
+</div>
 {% endblock %}
