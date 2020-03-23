@@ -5,7 +5,12 @@ __created__     =       "03/23/2020 02:53"
 '''
 
 
-from .views import Home, LeagueProfile, LeagueRanked
+from .views import (
+    Home, 
+    LeagueProfile, 
+    LeagueRanked,
+    ProfileAPI,
+)
 from django.urls import path
 
 
@@ -19,7 +24,12 @@ urlpatterns = [
         'profile/',
         LeagueProfile.as_view(),
         name = "profile",
-    ),	
+    ),
+    path(
+        'profile-api/',
+        ProfileAPI.as_view(),
+        name = "profileapi",
+    ),  
     path(
         'ranked/',
         LeagueRanked.as_view(),
