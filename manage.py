@@ -2,8 +2,8 @@
 
 '''
 __author__      =       "Roberto Rocuant"
-__version__     =       "0.10"
-__created__     =       "27-08-2019-23:30"
+__version__     =       "1.0.0"
+__created__     =       "03/23/2020 02:53"
 '''
 
 
@@ -12,7 +12,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'league.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'leaguestats.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

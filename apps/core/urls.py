@@ -1,19 +1,28 @@
 '''
 __author__      =       "Roberto Rocuant"
-__version__     =       "0.1"
-__created__     =       "05-08-2019-08:51"
+__version__     =       "1.0.0"
+__created__     =       "03/23/2020 02:53"
 '''
 
 
-from .views import LeagueLogin, LeagueOfLegends
+from .views import Home, LeagueProfile, LeagueRanked
 from django.urls import path
 
 
 urlpatterns = [
-
-	# User:
-    path('login', 		LeagueLogin.as_view(),			name='login'),
-
-    # Main:
-    path('', 			LeagueOfLegends.as_view(),			name='main'),
+	path(
+        '',
+        Home.as_view(),
+        name = "home",
+    ),	
+	path(
+        'profile/',
+        LeagueProfile.as_view(),
+        name = "profile",
+    ),	
+    path(
+        'ranked/',
+        LeagueRanked.as_view(),
+        name = "ranked",
+    ),
 ]
