@@ -1,7 +1,12 @@
 {% extends 'core/home.html' %}
 {% load static %}
 
-{% block title %} | PROFILE{% endblock %}
+{% block title %}| PROFILE{% endblock %}
 
 {% block content %}
+<br>
+	<center>
+		<input type="text" name="summonerId" ng-model="summonerId">
+		<button type="button" class="btn btn-info">SEARCH</button>
+	</center>
 {% endblock %}
