@@ -9,6 +9,7 @@ app.controller("leagueStatsController", function ($http, $scope) {
     $scope.warning = false;
     $scope.danger = false;
     $scope.notregistered = false;
+    $scope.api_error = false;
     $scope.template = false;
     $scope.loading = false;
     $scope.solo_q_bool = false;
@@ -16,12 +17,15 @@ app.controller("leagueStatsController", function ($http, $scope) {
     $scope.searchSummoner = function () {
         $scope.danger = false;
         $scope.notregistered = false;
+        $scope.api_error = false;
+        $scope.template = false;
         $scope.loading = true;
         if (!$scope.summonerName || !$scope.summonerRegion) {
             $scope.loading = false;
             $scope.warning = true;
         } else {
             $scope.warning = false;
+            $scope.template = false;
             var data = {
                 nick: $scope.summonerName,
                 region: $scope.summonerRegion
@@ -40,12 +44,13 @@ app.controller("leagueStatsController", function ($http, $scope) {
                 }
                 $scope.extra = response.data.extra;
             }, function errorCallback(response) {
+                $scope.loading = false;
                 if (response.status === 404) {
-                    $scope.loading = false;
                     $scope.danger = true;
                 } else if (response.status === 400) {
-                    $scope.loading = false;
                     $scope.notregistered = true;
+                } else if (response.status === 403) {
+                    $scope.api_error = true;
                 } else {
                     console.log("Error.");
                 }

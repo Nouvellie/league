@@ -6,7 +6,7 @@
 {% block content %}
 <div ng-controller="leagueStatsController">
     <br>
-    <form class="form-inline" style="margin: 0 auto; width:35%">
+    <form class="form-inline" style="margin: 0 auto; width:40%">
         <div class="custom-control my-1 mr-sm-2">
           SUMMONER: <input type="text" id="summonerName" ng-model="summonerName" required>
         </div>
@@ -17,8 +17,10 @@
           <option value="la1">LAN</option>
           <option value="na1">NA</option>
           <option value="euw1">EUW</option>
-        </select>
-        <button ng-click="searchSummoner()" type="submit" class="btn btn-info">SEARCH</button>
+        </select><br>
+        <div class="custom-control my-1 mr-sm-2">
+          <button ng-click="searchSummoner()" type="submit" class="btn btn-info">SEARCH</button>  
+        </div>
     </form>
     <br>
     <div align="center">
@@ -28,6 +30,9 @@
         </div>
         <div class="alert alert-warning" role="alert" ng-if="warning">
             All fields are required.
+        </div>
+        <div class="alert alert-warning" role="alert" ng-if="api_error">
+            Riot Api expired.
         </div>
         <div class="alert alert-danger" role="alert" ng-if="danger">        
           Summoner without information to show.
@@ -82,28 +87,6 @@
 
       </div>
     </div>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <div ng-if="template">
-
-      <span class="badge badge-pill badge-primary">Primary</span><img src="/media/icon/{$summoner.profileIconId$}.jpg" class="card-img-top" alt="...">
-
-      <div class="card" style="width: 18rem;">
-        <img src="/media/icon/{$summoner.profileIconId$}.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{$summoner.name$}</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{$league.tier$} {$league.rank$}</li>
-          <li class="list-group-item">{$league.leaguePoints$}</li>
-          <li class="list-group-item">Lvl {$summoner.summonerLevel$}</li>
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link">Win: {$league.wins$}</a>
-          <a href="#" class="card-link">Lose {$league.losses$}</a>
-        </div>
-      </div>
-    </div>
-
+  
 </div>
 {% endblock %}

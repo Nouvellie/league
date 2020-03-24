@@ -14,6 +14,7 @@ from rest_framework.response import Response
 from rest_framework.status import (
 	HTTP_200_OK, 
 	HTTP_400_BAD_REQUEST, 
+	HTTP_403_FORBIDDEN,
 	HTTP_404_NOT_FOUND,
 )
 from rest_framework.views import APIView
@@ -53,7 +54,13 @@ class ProfileAPI(APIView):
 			params = {
 				'api_key': API_KEY,
 			}
-			summoner_result = requests.get(url=summoner_url, params=params,).json()
+			summoner_result = requests.get(url=summoner_url, params=params,)
+			
+			if summoner_result.status_code == 403:
+				return Response({'error': 'Riot Api expired.'}, status=HTTP_403_FORBIDDEN)
+
+			else: 
+				summoner_result = summoner_result.json()
 
 			summary_url = 'https://' + region + '.api.riotgames.com/lol/league/v4/entries/by-summoner/' + summoner_result['id']
 
