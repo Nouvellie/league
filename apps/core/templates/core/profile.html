@@ -1,14 +1,109 @@
-{% extends 'core/home.html' %}
+{% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}| PROFILE{% endblock %}
+{% block title %}PROFILE{% endblock %}
 
 {% block content %}
 <div ng-controller="leagueStatsController">
-  <center>
     <br>
-    Nickname: <input type="text" name="summonerName" ng-model="summonerName">
-    <button ng-click="searchSummoner($event)" type="button" class="btn btn-info">Search</button>
-  </center>
+    <form class="form-inline" style="margin: 0 auto; width:35%">
+        <div class="custom-control my-1 mr-sm-2">
+          SUMMONER: <input type="text" id="summonerName" ng-model="summonerName" required>
+        </div>
+
+        <label class="my-1 mr-2" for="region">REGION:</label>
+        <select ng-model="summonerRegion" class="custom-select my-1 mr-sm-2" id="summonerRegion" required>
+          <option value="la2">LAS</option>
+          <option value="la1">LAN</option>
+          <option value="na1">NA</option>
+          <option value="euw1">EUW</option>
+        </select>
+        <button ng-click="searchSummoner()" type="submit" class="btn btn-info">SEARCH</button>
+    </form>
+    <br>
+    <div align="center">
+      <div class="container col-md-6 ng-cloak">
+        <div class="col" ng-if="loading">
+            <i class="fa fa-refresh fa-3x fa-spin" style="color: #17a2b8;"></i>
+        </div>
+        <div class="alert alert-warning" role="alert" ng-if="warning">
+            All fields are required.
+        </div>
+        <div class="alert alert-danger" role="alert" ng-if="danger">        
+          Summoner without information to show.
+        </div>
+        <div class="alert alert-dark" role="alert" ng-if="notregistered">
+          This summoner is not registered.
+        </div>
+      </div>
+
+    </div>
+
+  <!-- Result -->
+    <div ng-if="template">
+      <div class="card" style="width: 18rem;">
+        <img src={$extra.profileIcon$} class="card-img-top" alt="...">
+
+        <div class="card-body">
+          <h5 class="card-title text-center"><strong>{$summoner.name$}</strong></h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            
+              <div class="column col-md-6 text-center">
+                <br>
+                <span class="badge badge-pill badge-info">{$solo_q.tier$} {$solo_q.rank$}</span>
+              </div>
+
+              <div class="column col-md-6 text-center">
+                <img src={$solo_q.solo_q_tierIcon$} width="70" height="70" alt="...">
+              </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="card-text text-info text-center"><strong>Win ratio: {$solo_q.solo_q_wr$}%</strong></p>
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            
+              <div class="column col-md-6 text-center">
+                <span class="badge badge-pill badge-success">{$solo_q.wins$}</span>
+              </div>
+
+              <div class="column col-md-6 text-center">
+                <span class="badge badge-pill badge-danger">{$solo_q.losses$}</span>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div ng-if="template">
+
+      <span class="badge badge-pill badge-primary">Primary</span><img src="/media/icon/{$summoner.profileIconId$}.jpg" class="card-img-top" alt="...">
+
+      <div class="card" style="width: 18rem;">
+        <img src="/media/icon/{$summoner.profileIconId$}.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{$summoner.name$}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{$league.tier$} {$league.rank$}</li>
+          <li class="list-group-item">{$league.leaguePoints$}</li>
+          <li class="list-group-item">Lvl {$summoner.summonerLevel$}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Win: {$league.wins$}</a>
+          <a href="#" class="card-link">Lose {$league.losses$}</a>
+        </div>
+      </div>
+    </div>
+
 </div>
 {% endblock %}
