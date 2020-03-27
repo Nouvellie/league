@@ -27,7 +27,7 @@ import shutil
 # for number in tqdm(profileIcon_list['data']):
 for number in tqdm(profileIcon_list['data']):
     try:
-        a = 'http://ddragon.leagueoflegends.com/cdn/10.6.1/img/item/' + profileIcon_list['data'][number]['image']['full']
+        a = 'http://ddragon.leagueoflegends.com/cdn/10.6.1/img/profileicon/' + profileIcon_list['data'][number]['image']['full']
         path = 'profileIcon/' + str(number) + ".png"
         r = req.get(a)
         if r.status_code == 200:
