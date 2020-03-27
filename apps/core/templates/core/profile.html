@@ -43,9 +43,13 @@
       </div>
 
     </div>
-
+  
+  <br><br>
   <!-- Result -->
     <div ng-if="template">
+      <div class="row">
+        <div class="column col-md-4">
+          
       <div class="card" style="width: 18rem;">
         <img src={$extra.profileIcon$} class="card-img-top" alt="...">
 
@@ -86,7 +90,28 @@
         </div>
 
       </div>
-    </div>
+        </div>
+        <div class="col-md-8">
+          <section>
+            <div class="row">
+              <div class="column col-md-2">SOLOQ</div>
+              <div class="column col-md-2">IMG</div>
+              <div class="column col-md-2">SUMS</div>
+              <div class="column col-md-2">RUNS</div>
+              <div class="column col-md-2">KDA</div>
+            </div>
+          </section>
+          <section>
+            other section
+          </section>
+          <section>
+          other section  
+          </section>
+          
+        </div>
+      </div>
+
+    </div> <!-- Result. -->
   
-</div>
+</div> <!-- Ng Controller. -->
 {% endblock %}

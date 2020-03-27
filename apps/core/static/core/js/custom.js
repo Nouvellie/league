@@ -1,4 +1,4 @@
-var app = angular.module('leagueStats', []);
+var app = angular.module("leagueStats", []);
 app.config(function ($interpolateProvider) {
     'use strict';
     $interpolateProvider.startSymbol('{$');
