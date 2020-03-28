@@ -50,10 +50,12 @@ class ProfileAPI(APIView):
 		region = form['region'] # LAN, LAS, NA, EUW.
 
 		try:
-			summoner_url = 'https://' + region + '.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + str(nick)
 			params = {
 				'api_key': API_KEY,
 			}
+
+			summoner_url = 'https://' + region + '.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + str(nick)
+			
 			summoner_result = requests.get(url=summoner_url, params=params,)
 			
 			if summoner_result.status_code == 403:
@@ -185,6 +187,16 @@ class ProfileAPI(APIView):
 				final_response.update({
 					'flex_bool': False,
 				})
+
+			print(final_response['summoner']['accountId'])
+
+			match_list_url = 'https://' + region + '.api.riotgames.com/match/v4/matchlists/by-account/' + final_response['summoner']['accountId']
+			print(match_list_url)
+			match_list_url_result = requests.get(url=match_list_url, params=params,).json()
+			print(match_list_url_result)
+
+			# for n1 in match_list_url_result['matches']:
+			# 	print(n1['gameId'])
 
 			return Response(final_response, status=HTTP_200_OK)
 
