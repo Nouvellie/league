@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '^ya7z7=+8tr(qv3@rory@tn23&a+=4g^x2g3byrw#$!2lh7hlz'
 
-API_KEY = 'RGAPI-cf9996b2-b2bb-48d9-9ac9-a67bce475dd0'
+API_KEY = 'RGAPI-a21740b5-0a07-4ad9-8b70-eb951ea2ce39'
 
 DEBUG = True
 
